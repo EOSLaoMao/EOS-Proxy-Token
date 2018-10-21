@@ -1,6 +1,6 @@
 #include <eosiolib/eosio.hpp>
 #include <eosiolib/currency.hpp>
-#include <eosio.token.hpp>
+#include "eosio.token.hpp"
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 
@@ -20,9 +20,13 @@ public:
     using contract::contract;
     proxytoken( name self ) : contract(self){}
 
-    void empty(){}
+    void empty(){
+    }
 
     void receivedTokens( const currency::transfer& t, account_name code ) {
+        if (t.from != N(bankofstaked)) {
+            return;
+        }
         if( t.to == _self ) {
             string cMemo = t.memo;
             string stringName(getAccountNameFromMemo(cMemo));

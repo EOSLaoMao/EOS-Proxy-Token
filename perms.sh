@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ACCOUNT=${1:-proxytoken}
-PKEY=${2:-EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV}
+ACCOUNT=${1:-masktransfer}
+PKEY=$2
 
-cleos -u https://nodes.get-scatter.com set account permission $ACCOUNT active \
+cleos set account permission $ACCOUNT active \
 '{"threshold": 1,"keys": [{"key": "'$PKEY'","weight": 1}],"accounts": [{"permission":{"actor":"'$ACCOUNT'","permission":"eosio.code"},"weight":1}]}' owner
